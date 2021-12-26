@@ -1,10 +1,11 @@
-name: Env Util CI (Pull Requests)
+name: Env Util CI (Release)
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'What kind of version bump do you want to release? Accepted versions: major | minor | patch'
+        required: true
 
 env:
   NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
@@ -12,6 +13,8 @@ env:
 jobs:
   setup:
     runs-on: ubuntu-18.04
+
+    if: github.event.inputs.version == 'major' || github.event.inputs.version == 'minor' || github.event.inputs.version == 'patch'
 
     steps:
       - uses: actions/checkout@v2
@@ -50,13 +53,12 @@ jobs:
     - name: Run tests
       run: yarn test
 
-  publish_pre_release:
-    name: "Publish new alpha version"
+  publish_major_version:
+    name: "Publish new major version"
     needs: test
     runs-on: ubuntu-latest
 
-    # only want to run this job when there's a pull request and never when there's a push to the main branch
-    if: github.repository_owner == 'BolajiOlajide' && github.event_name != 'push'
+    if: github.repository_owner == 'BolajiOlajide'
 
     steps:
     - uses: actions/checkout@v2
@@ -82,8 +84,18 @@ jobs:
         git config user.name "BolajiOlajide"
         git config user.email "25608335+BolajiOlajide@users.noreply.github.com"
 
-    - name: Bump Prerelease version
-      run: yarn version --prerelease --preid alpha-${GITHUB_RUN_ID}
+    - name: Update changelog
+      uses: thomaseizinger/keep-a-changelog-new-release@1.1.0
+      with:
+        version: ${{github.event.inputs.version}}
+
+    - name: Add & Commit Changelog file
+      run: |
+        git add CHANGELOG.md
+        git commit --message "Update Changelog for new version"
+
+    - name: Bump to next ${{github.event.inputs.version}} version
+      run: yarn version --${{github.event.inputs.version}}
 
     - name: get-npm-version
       id: package-version
@@ -94,8 +106,7 @@ jobs:
       env:
         NODE_AUTH_TOKEN: NPM_AUTH_TOKEN
 
-    - name: Comment PR
-      uses: thollander/actions-comment-pull-request@v1
-      with:
-        message: 'Install with: `yarn add @bolajiolajide/env-utils@${{steps.package-version.outputs.current-version}}`'
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push git tag and updated package.json
+      run: |
+        git push origin v${{steps.package-version.outputs.current-version}}
+        git push origin main
