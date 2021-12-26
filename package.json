@@ -1,6 +1,6 @@
 {
   "name": "@bolajiolajide/env-utils",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Smart Environment Utilities for faster operations",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
