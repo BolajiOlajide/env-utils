@@ -13,6 +13,6 @@
     "lib": ["es2017"],
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "__tests__/*", "sample.ts"],
-  "exclude": ["node_modules", "lib"]
+  "include": ["src/**/*", "sample.ts"],
+  "exclude": ["node_modules", "lib", "__tests__"]
 }

@@ -1,5 +1,12 @@
-import type { EnvOptions, EnvValue } from './types';
-
+type EnvValue = string | number | boolean;
+interface EnvOptions {
+  devDefault?: EnvValue | EnvValue[];
+  isBoolean?: boolean;
+  optional?: boolean;
+  commaSeparated?: boolean;
+  isNumber?: boolean;
+  commaSeparator?: string;
+}
 
 const trimElements = (element: string) => element.trim();
 
