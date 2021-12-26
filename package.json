@@ -8,7 +8,7 @@
   "umd": "lib/index.umd.js",
   "scripts": {
     "test": "jest",
-    "build": "yarn build:rollup && yarn build:declaration",
+    "build": "yarn build:declaration && yarn build:rollup",
     "build:rollup": "rollup -c rollup.config.ts",
     "build:declaration": "tsc",
     "cleanup": "rm -rf lib"
