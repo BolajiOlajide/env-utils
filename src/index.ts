@@ -3,9 +3,9 @@ interface EnvOptions {
   devDefault?: EnvValue | EnvValue[];
   isBoolean?: boolean;
   optional?: boolean;
-  commaSeparated?: boolean;
+  isArray?: boolean;
   isNumber?: boolean;
-  commaSeparator?: string;
+  separator?: string;
 }
 
 const trimElements = (element: string) => element.trim();
@@ -25,8 +25,8 @@ const getEnvVar = (key: string, options: EnvOptions = {}): EnvValue | EnvValue[]
     return envValue === 'true';
   }
 
-  if (options.commaSeparated && isString) {
-    return envValue.split(options.commaSeparator || ',').map(trimElements);
+  if (options.isArray && isString) {
+    return envValue.split(options.separator || ',').map(trimElements);
   }
 
   if (options.isNumber && isString) {

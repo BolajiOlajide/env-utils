@@ -67,15 +67,15 @@ describe('@bolajiolajide/env-utils', () => {
       done();
     });
 
-    test('returns an array if envValue is a string and commaSeparated is true', (done) => {
-      const envVar = getEnvVar('TEST_ARR_VAR', { commaSeparated: true });
+    test('returns an array if envValue is a string and isArray is true', (done) => {
+      const envVar = getEnvVar('TEST_ARR_VAR', { isArray: true });
 
       expect(envVar).toEqual(['cat' ,'cow', 'mouse', 'dog']);
       done();
     });
 
-    test('returns an array if envValue is a string and commaSeparated is true and separator is defined', (done) => {
-      const envVar = getEnvVar('TEST_ARR_VAR_2', { commaSeparated: true, commaSeparator: ' ' });
+    test('returns an array if envValue is a string and isArray is true and separator is defined', (done) => {
+      const envVar = getEnvVar('TEST_ARR_VAR_2', { isArray: true, separator: ' ' });
 
       expect(envVar).toEqual(['cat' ,'cow', 'mouse', 'dog']);
       done();
