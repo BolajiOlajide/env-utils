@@ -1,5 +1,7 @@
 # ENV Utils
 
+[![Env Util CI (Pull Requests)](https://github.com/BolajiOlajide/env-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/BolajiOlajide/env-utils/actions/workflows/ci.yml)
+
 Easily Get Environment Variables
 
 ## Install
