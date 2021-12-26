@@ -63,6 +63,12 @@ jobs:
       with:
         node-version: 14.x
 
+    - name: Load node_modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
     - name: Build
       run: yarn build
 
