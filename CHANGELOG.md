@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [minor] - 2021-12-26
+## 0.1.0 - 2021-12-26
 
 -   Create fork of Dane Thurber's [env-util](https://github.com/danethurber/env-utils)
 

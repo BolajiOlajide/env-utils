@@ -89,11 +89,6 @@ jobs:
       with:
         version: ${{github.event.inputs.version}}
 
-    - name: Add & Commit Changelog file
-      run: |
-        git add CHANGELOG.md
-        git commit --message "Update Changelog for new version"
-
     - name: Bump to next ${{github.event.inputs.version}} version
       run: yarn version --${{github.event.inputs.version}}
 
