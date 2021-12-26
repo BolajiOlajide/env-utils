@@ -53,7 +53,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
 
-    if: github.repository_owner != 'BolajiOlajide'
+    if: github.repository_owner == 'BolajiOlajide'
 
     steps:
     - uses: actions/checkout@v2
