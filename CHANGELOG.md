@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-* Create fork of Dane Thurber's [env-util](https://github.com/danethurber/env-utils)
+## [minor] - 2021-12-26
 
-* Migrate `env-util` to typescript
+-   Create fork of Dane Thurber's [env-util](https://github.com/danethurber/env-utils)
 
-* Add new options to cater for numeric variables and update old options list
+-   Migrate `env-util` to typescript
 
-* Update README.md to be more descriptive
+-   Add new options to cater for numeric variables and update old options list
+
+-   Update README.md to be more descriptive
+
+[Unreleased]: https://github.com/BolajiOlajide/env-utils/compare/minor...HEAD
+
+[minor]: https://github.com/BolajiOlajide/env-utils/compare/7b2bb1f3e71bb5d1ea3da258cf6991f153c53f1f...minor
