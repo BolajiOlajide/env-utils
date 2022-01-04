@@ -17,7 +17,7 @@ Gets an environment variable. This returns an error if the environment variable 
 ```js
 import getEnvVar from 'env-utils';
 
-getEnvVar(envVarName as string, options);
+getEnvVar(envVarName, options);
 ```
 
 ### Options
@@ -77,5 +77,30 @@ You can lazy fetch an environment variable using the function below, it's a resu
 ```js
 const lazyGetEnvVar = (...args) => () => getEnvVar(...args);
 ```
+
+#### Utility Functions
+
+`env-utils` exports some utility functions that return `variables` in a certain type. This is especially useful for typescript projects, so you don't have to deal with type casting with the `as` keyword.
+
+Below is an example:
+
+```ts
+import getEnvVar, { getStringEnv, getNumericEnv } from '@bolajiolajide/env-utils';
+
+getEnvVar('SENTRY_DSN') // returns a value of type EnvValue | EnvValue[] | undefined
+// you'd need to manually type cast to a string `getEnvVar('SENTRY_DSN') as string` to avoid ts errror
+
+/*
+ * You can make use of the utility functions and they return the appropriate types
+*/
+getStringEnv('SENTRY_DSN') // will always return a string | undefined
+```
+
+N.B All utility functions have exactly the same signature as the `getEnvVar` function, along with some overrides that ensures that there are no implicit type conversion/casting.
+
+* `getStringEnv` returns an environment variable as a string
+* `getArrayEnv<T>` returns an environment variable as an array, can be passed a generic to identify the type of the array's content
+* `getBoolEnv` returns an environment variable as a boolean
+* `getNumericEnv` returns an environment variable as a number
 
 This works great with the [lazy-config](https://github.com/BolajiOlajide/lazy-config) module.

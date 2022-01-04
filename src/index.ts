@@ -42,7 +42,7 @@ const getEnvVar = (key: string, options: EnvOptions = {}): EnvValue | EnvValue[]
   return envValue;
 };
 
-export const getStringEnv = (key: string, options: EnvOptions = {}): string => {
+export const getStringEnv = (key: string, options: EnvOptions = {}): string | undefined => {
   return getEnvVar(key, {
     ...options,
     isNumber: false,
@@ -51,7 +51,7 @@ export const getStringEnv = (key: string, options: EnvOptions = {}): string => {
   }) as string;
 };
 
-export const getNumericEnv = (key: string, options: EnvOptions = {}): number => {
+export const getNumericEnv = (key: string, options: EnvOptions = {}): number | undefined => {
   return getEnvVar(key, {
     ...options,
     isNumber: true,
@@ -60,7 +60,7 @@ export const getNumericEnv = (key: string, options: EnvOptions = {}): number => 
   }) as number;
 };
 
-export const getBoolEnv = (key: string, options: EnvOptions = {}): boolean => {
+export const getBoolEnv = (key: string, options: EnvOptions = {}): boolean | undefined => {
   return getEnvVar(key, {
     ...options,
     isNumber: false,
@@ -69,7 +69,7 @@ export const getBoolEnv = (key: string, options: EnvOptions = {}): boolean => {
   }) as boolean;
 };
 
-export const getArrayEnv = <T>(key: string, options: EnvOptions = {}): Array<T> => {
+export const getArrayEnv = <T>(key: string, options: EnvOptions = {}): Array<T> | undefined => {
   return getEnvVar(key, {
     ...options,
     isArray: true
