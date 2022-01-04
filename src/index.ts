@@ -42,4 +42,38 @@ const getEnvVar = (key: string, options: EnvOptions = {}): EnvValue | EnvValue[]
   return envValue;
 };
 
+export const getStringEnv = (key: string, options: EnvOptions = {}): string => {
+  return getEnvVar(key, {
+    ...options,
+    isNumber: false,
+    isBoolean: false,
+    isArray: false
+  }) as string;
+};
+
+export const getNumericEnv = (key: string, options: EnvOptions = {}): number => {
+  return getEnvVar(key, {
+    ...options,
+    isNumber: true,
+    isBoolean: false,
+    isArray: false
+  }) as number;
+};
+
+export const getBoolEnv = (key: string, options: EnvOptions = {}): boolean => {
+  return getEnvVar(key, {
+    ...options,
+    isNumber: false,
+    isBoolean: true,
+    isArray: false
+  }) as boolean;
+};
+
+export const getArrayEnv = <T>(key: string, options: EnvOptions = {}): Array<T> => {
+  return getEnvVar(key, {
+    ...options,
+    isArray: true
+  }) as unknown as Array<T>;
+};
+
 export default getEnvVar;
